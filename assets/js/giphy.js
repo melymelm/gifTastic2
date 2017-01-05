@@ -1,6 +1,4 @@
 
-
-
 var topics = ["dog", "cat", "rabbit", "hamster", "fish", "horse", "cow", "otter", "ferret", "llama"];
   
 //   Try using a loop that appends a button for each string in the array.
@@ -9,20 +7,20 @@ var topics = ["dog", "cat", "rabbit", "hamster", "fish", "horse", "cow", "otter"
       //create buttons out of array list
       function renderButtons() {
 
-        	$("#dog-view").empty();
+          $("#dog-view").empty();
           
         // Loop through the array list, then generate buttons for each in the array
 
-	        for (var i=0; i<topics.length; i++) {
+          for (var i=0; i<topics.length; i++) {
             //class answer
             var a = $("<button>");
             a.addClass("btn btn-info dogs " + topics[i]);
             a.attr("data-name", topics[i]);
             a.text(topics[i]);
             $("#dog-view").append(a); 
-          	}
-          	
-  		};
+            }
+            
+      };
 
       // This function handles events where the add dog button is clicked
         $("#add-dog").on("click", function(event) {
@@ -50,24 +48,24 @@ var topics = ["dog", "cat", "rabbit", "hamster", "fish", "horse", "cow", "otter"
         renderButtons();
       });
 
-  		//function to pull giphy link and populate from array list
-  		$("#dog-view").on("click", "button", function() {
+      //function to pull giphy link and populate from array list
+      $("#dog-view").on("click", "button", function() {
 
          $("#images").empty();
 
-  			//look up delegated events -- need to know why
+        //look up delegated events -- need to know why
 
           var animal = $(this).attr("data-name");
-      		var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + animal + "&api_key=dc6zaTOxFJmzC&limit=10&offset=10";
+          var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + animal + "&api_key=dc6zaTOxFJmzC&limit=10&offset=10";
 
-      			$.ajax({
-          		url: queryURL,
-          		method: "GET"
-          		}).done(function(response){
+            $.ajax({
+              url: queryURL,
+              method: "GET"
+              }).done(function(response){
 
               for (var i=0; i<11; i++) {
 
-          		 //dynamically creating an image tag
+               //dynamically creating an image tag
 
               var animateImage = response.data[i].images.fixed_height.url;
 
@@ -119,7 +117,7 @@ var topics = ["dog", "cat", "rabbit", "hamster", "fish", "horse", "cow", "otter"
               $("#images").prepend(gifDiv);
               }
 
-          		})
+              })
          
         });
 
@@ -129,19 +127,19 @@ var topics = ["dog", "cat", "rabbit", "hamster", "fish", "horse", "cow", "otter"
       $(document).on("click", ".gif", function() {
           var state = $(this).attr("data-state");
 
-  		
+      
 
 
-  			if (state === "still") {
-  				$(this).attr("src", $(this).data("animate"));
-  				$(this).attr("data-state", "animate");
-  			}
-  			else {
-  				$(this).attr("src", $(this).data("still"));
-  				$(this).attr("data-state", "still");
-  			}
+        if (state === "still") {
+          $(this).attr("src", $(this).data("animate"));
+          $(this).attr("data-state", "animate");
+        }
+        else {
+          $(this).attr("src", $(this).data("still"));
+          $(this).attr("data-state", "still");
+        }
 
-  			 });
+         });
 
        
 
